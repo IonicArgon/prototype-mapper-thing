@@ -2,10 +2,9 @@
 import requests
 import urllib.parse
 
-class GoogleDirections:
-    def __init__(self, p_api_key, p_route_endpoint, p_places_endpoint):
+class GooglePlaces:
+    def __init__(self, p_api_key, p_places_endpoint):
         self.__m_api_key = p_api_key
-        self.__m_route_endpoint = p_route_endpoint
         self.__m_places_endpoint = p_places_endpoint
 
     def __get_place(self, p_place_name):
