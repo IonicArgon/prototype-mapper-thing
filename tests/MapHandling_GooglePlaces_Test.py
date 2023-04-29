@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 
-from mapping.GooglePlaces import GooglePlaces
+from MapHandling.GooglePlaces import GooglePlaces
 
 class TestGooglePlaces(unittest.TestCase):
     def setUp(self):

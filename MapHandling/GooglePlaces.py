@@ -24,5 +24,13 @@ class GooglePlaces:
         else:
             return None
         
+    ##todo: remove for production
     def test_accessor(self, p_place_name):
         return self.__get_place(p_place_name)
+    
+    def get_place_id(self, p_place_name):
+        place = self.__get_place(p_place_name)
+        if place is not None:
+            return place[0]["place_id"]
+        else:
+            return None
