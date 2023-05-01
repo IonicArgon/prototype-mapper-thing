@@ -1,17 +1,20 @@
 import csv
-import datetime
 import calendar
 
 class ContractorDataParser():
-    def __init__(self, p_file_path):
+    def __init__(self, p_file_path=None):
         self.__m_file_path = p_file_path
-        self.__m_contractor_data = {}
+        self.__m_contractor_data = None
 
-        self.__parse()
+        if p_file_path is not None:
+            self.__parse()
 
     def __parse(self):
         with open(self.__m_file_path, 'r') as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
+
+            ##todo: make a check to see if the header row is in the correct format
+
             next(csv_reader) # skip header row
             for row in csv_reader:
                 ##todo: also figure out what i want to use for the dictionary keys
@@ -30,9 +33,15 @@ class ContractorDataParser():
         return REFERENCE_LIST.index(p_weekday.upper())
 
     def get_contractor(self, p_name):
-        return self.__m_contractor_data[p_name]
+        if self.__m_contractor_data is not None:
+            return self.__m_contractor_data[p_name]
+        else:
+            return -1
     
     def get_all_contractors(self):
         'NOTE: THIS IS A GENERATOR, DON\'T BE DUMB'
-        for contractor in self.__m_contractor_data:
-            yield self.__m_contractor_data[contractor]
+        if self.__m_contractor_data is not None:
+            for contractor in self.__m_contractor_data:
+                yield contractor
+        else:
+            return -1

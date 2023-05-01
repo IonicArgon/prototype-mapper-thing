@@ -2,15 +2,21 @@ import csv
 import datetime
 
 class CustomerDataParser():
-    def __init__(self, p_file_path):
+    def __init__(self, p_file_path=None):
         self.__m_file_path = p_file_path
-        self.__m_customer_data = {}
+        self.__m_customer_data = None
 
-        self.__parse()
+        if p_file_path is not None:
+            self.__parse()
 
     def __parse(self):
+        self.__m_customer_data = {}
+
         with open(self.__m_file_path, 'r') as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
+            
+            ##todo: make a check to see if the header row is in the correct format
+
             next(csv_reader) # skip header row
             for row in csv_reader:
                 ##todo: figure out what i want to use for the dictionary keys
@@ -24,10 +30,24 @@ class CustomerDataParser():
 
                 self.__m_customer_data[row[0]] = entry
 
+    def set_file_path(self, p_file_path):
+        if ".csv" in p_file_path:
+            self.__m_file_path = p_file_path
+            self.__parse()
+            return 0
+        else:
+            return -1
+
     def get_customer(self, p_address):
-        return self.__m_customer_data[p_address]
+        if self.__m_customer_data is not None:
+            return self.__m_customer_data[p_address]
+        else:
+            return -1
     
     def get_all_customers(self):
         'NOTE: THIS IS A GENERATOR, DON\'T BE DUMB'
-        for customer in self.__m_customer_data:
-            yield self.__m_customer_data[customer]
+        if self.__m_customer_data is not None:
+            for customer in self.__m_customer_data:
+                yield customer
+        else:
+            return -1
