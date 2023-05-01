@@ -17,11 +17,9 @@ class GoogleDistanceMatrix:
         destinations = "|".join(["place_id:" + destination for destination in p_destinations])
         url_destinations = '&destinations=' + urllib.parse.quote_plus(destinations)
         url_mode = '&mode=driving'
-        url_traffic_model = '&traffic_model=best_guess'
-        url_departure_time = '&departure_time=' + str(int(time.time()))
         url_key = '&key=' + self.__m_api_key
 
-        url = self.__m_matrix_endpoint + url_origins + url_destinations + url_mode + url_traffic_model + url_departure_time + url_key
+        url = self.__m_matrix_endpoint + url_origins + url_destinations + url_mode + url_key
 
         response = requests.request("GET", url, headers=headers, data=payload)
 
@@ -33,7 +31,6 @@ class GoogleDistanceMatrix:
                     cell = []
                     cell.append(matrix_element["distance"]["value"])
                     cell.append(matrix_element["duration"]["value"])
-                    cell.append(matrix_element["duration_in_traffic"]["value"])
                     row.append(cell)
                 self.__m_stored_matrix.append(row)
         else:

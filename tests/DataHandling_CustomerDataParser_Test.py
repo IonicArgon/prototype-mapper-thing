@@ -17,7 +17,7 @@ class TestCustomerDataParser(unittest.TestCase):
 
         self.__m_test_location = "38 Battersea Crescent"
         self.__m_test_region = "North York"
-        self.__m_test_job_date = "2023/05/01"
+        self.__m_test_job_date = [0]
 
     def test_ReturnIsNotNone(self):
         length = len(list(self.__m_customer_data_parser.get_all_customers()))
@@ -36,11 +36,16 @@ class TestCustomerDataParser(unittest.TestCase):
         self.assertEqual(test_customer['region'], self.__m_test_region)
         print(f'[{self.__m_test_name}] CustomerDataParser returned customer with region: {test_customer["region"]}.')
 
-    def test_ReturnFirstHasJobDate(self):
+    def test_ReturnFirstHasWeekdays(self):
         test_customer = self.__m_customer_data_parser.get_customer(self.__m_test_location)
-        self.assertIsNotNone(test_customer['job date'])
-        self.assertEqual(test_customer['job date'].strftime('%Y/%m/%d'), self.__m_test_job_date)
-        print(f'[{self.__m_test_name}] CustomerDataParser returned customer with job date: {test_customer["job date"]}.')
+        self.assertIsNotNone(test_customer['weekdays'])
+        self.assertEqual(test_customer['weekdays'], self.__m_test_job_date)
+        print(f'[{self.__m_test_name}] CustomerDataParser returned customer with weekdays: {test_customer["weekdays"]}.')
+
+    def test_ReturnFirstHasFrequency(self):
+        test_customer = self.__m_customer_data_parser.get_customer(self.__m_test_location)
+        self.assertIsNotNone(test_customer['frequency'])
+        print(f'[{self.__m_test_name}] CustomerDataParser returned customer with frequency: {test_customer["frequency"]}.')
 
     def test_YieldContainsAll(self):
         counter = 0
@@ -49,8 +54,9 @@ class TestCustomerDataParser(unittest.TestCase):
         for customer in self.__m_customer_data_parser.get_all_customers():
             self.assertIsNotNone(customer['address'])
             self.assertIsNotNone(customer['region'])
-            self.assertIsNotNone(customer['job date'])
-            print(f'[{self.__m_test_name}] CustomerDataParser yielded customer: {customer["address"]}\n\twith region: {customer["region"]}\n\tand job date: {customer["job date"]}.')
+            self.assertIsNotNone(customer['weekdays'])
+            self.assertIsNotNone(customer['frequency'])
+            print(f'[{self.__m_test_name}] CustomerDataParser yielded customer: {customer["address"]}\n\twith region: {customer["region"]}\n\tand weekdays: {customer["weekdays"]}\n\tand frequency: {customer["frequency"]}.')
             counter += 1
 
         self.assertEqual(counter, length)

@@ -1,4 +1,4 @@
-address,region,date
-38 Battersea Crescent,North York,2023/05/01
-51 McFarland Ave,Toronto,2023/05/01
-15 Wimpole Dr,North York,2023/05/03
+address,region,weekdays,frequency
+38 Battersea Crescent,North York,Monday,2
+51 McFarland Ave,Toronto,Monday,2
+15 Wimpole Dr,North York,Tuesday,2

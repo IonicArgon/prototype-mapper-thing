@@ -1,5 +1,5 @@
 import csv
-import datetime
+import calendar
 
 class CustomerDataParser():
     def __init__(self, p_file_path=None):
@@ -26,9 +26,14 @@ class CustomerDataParser():
                 entry = {}
                 entry['address'] = row[0]
                 entry['region'] = row[1]
-                entry['job date'] = datetime.datetime.strptime(row[2], '%Y/%m/%d')
+                entry['weekdays'] = [self.__weekday_to_int(date) for date in row[2].split(';')]
+                entry['frequency'] = row[3]
 
                 self.__m_customer_data[row[0]] = entry
+
+    def __weekday_to_int(self, p_weekday):
+        REFERENCE_LIST = [day.upper() for day in list(calendar.day_name)]
+        return REFERENCE_LIST.index(p_weekday.upper())
 
     def set_file_path(self, p_file_path):
         if ".csv" in p_file_path:
