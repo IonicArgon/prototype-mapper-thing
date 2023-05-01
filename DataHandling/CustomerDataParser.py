@@ -48,6 +48,6 @@ class CustomerDataParser():
         'NOTE: THIS IS A GENERATOR, DON\'T BE DUMB'
         if self.__m_customer_data is not None:
             for customer in self.__m_customer_data:
-                yield customer
+                yield self.__m_customer_data[customer]
         else:
             return -1

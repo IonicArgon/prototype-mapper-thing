@@ -50,7 +50,7 @@ class TestCustomerDataParser(unittest.TestCase):
             self.assertIsNotNone(customer['address'])
             self.assertIsNotNone(customer['region'])
             self.assertIsNotNone(customer['job date'])
-            print(f'[{self.__m_test_name}] CustomerDataParser yielded customer {customer["address"]} with region {customer["region"]} and job date {customer["job date"]}.')
+            print(f'[{self.__m_test_name}] CustomerDataParser yielded customer: {customer["address"]}\n\twith region: {customer["region"]}\n\tand job date: {customer["job date"]}.')
             counter += 1
 
         self.assertEqual(counter, length)

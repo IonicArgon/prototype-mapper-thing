@@ -15,7 +15,7 @@ class TestContractorDataParser(unittest.TestCase):
         self.__m_test_file_path = os.getenv("CONTRACTOR_DATA_FILE_PATH")
         self.__m_contractor_data_parser = ContractorDataParser(self.__m_test_file_path)
 
-        self.__m_test_name = "Bob Smith"
+        self.__m_test_contractor = "Bob Smith"
         self.__m_test_address = "21 Fennimore Crescent"
         self.__m_test_regions = ["North York", "Toronto"]
         self.__m_test_available = [0, 2]
@@ -26,25 +26,25 @@ class TestContractorDataParser(unittest.TestCase):
         print(f'[{self.__m_test_name}] ContractorDataParser returned {length} contractors.')
 
     def test_ReturnFirstHasName(self):
-        test_contractor = self.__m_contractor_data_parser.get_contractor(self.__m_test_name)
+        test_contractor = self.__m_contractor_data_parser.get_contractor(self.__m_test_contractor)
         self.assertIsNotNone(test_contractor['name'])
-        self.assertEqual(test_contractor['name'], self.__m_test_name)
+        self.assertEqual(test_contractor['name'], self.__m_test_contractor)
         print(f'[{self.__m_test_name}] ContractorDataParser returned contractor with name: {test_contractor["name"]}.')
 
     def test_ReturnFirstHasAddress(self):
-        test_contractor = self.__m_contractor_data_parser.get_contractor(self.__m_test_name)
+        test_contractor = self.__m_contractor_data_parser.get_contractor(self.__m_test_contractor)
         self.assertIsNotNone(test_contractor['address'])
         self.assertEqual(test_contractor['address'], self.__m_test_address)
         print(f'[{self.__m_test_name}] ContractorDataParser returned contractor with address: {test_contractor["address"]}.')
 
     def test_ReturnFirstHasRegions(self):
-        test_contractor = self.__m_contractor_data_parser.get_contractor(self.__m_test_name)
+        test_contractor = self.__m_contractor_data_parser.get_contractor(self.__m_test_contractor)
         self.assertIsNotNone(test_contractor['regions'])
         self.assertListEqual(test_contractor['regions'], self.__m_test_regions)
         print(f'[{self.__m_test_name}] ContractorDataParser returned contractor with regions: {test_contractor["regions"]}.')
 
     def test_ReturnFirstHasAvailable(self):
-        test_contractor = self.__m_contractor_data_parser.get_contractor(self.__m_test_name)
+        test_contractor = self.__m_contractor_data_parser.get_contractor(self.__m_test_contractor)
         self.assertIsNotNone(test_contractor['available'])
         self.assertListEqual(test_contractor['available'], self.__m_test_available)
         print(f'[{self.__m_test_name}] ContractorDataParser returned contractor with available: {test_contractor["available"]}.')

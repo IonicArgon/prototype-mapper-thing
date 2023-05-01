@@ -10,6 +10,7 @@ class ContractorDataParser():
             self.__parse()
 
     def __parse(self):
+        self.__m_contractor_data = {}
         with open(self.__m_file_path, 'r') as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
 
@@ -31,6 +32,14 @@ class ContractorDataParser():
     def __weekday_to_int(self, p_weekday):
         REFERENCE_LIST = [day.upper() for day in list(calendar.day_name)]
         return REFERENCE_LIST.index(p_weekday.upper())
+    
+    def set_file_path(self, p_file_path):
+        if ".csv" in p_file_path:
+            self.__m_file_path = p_file_path
+            self.__parse()
+            return 0
+        else:
+            return -1
 
     def get_contractor(self, p_name):
         if self.__m_contractor_data is not None:
@@ -42,6 +51,6 @@ class ContractorDataParser():
         'NOTE: THIS IS A GENERATOR, DON\'T BE DUMB'
         if self.__m_contractor_data is not None:
             for contractor in self.__m_contractor_data:
-                yield contractor
+                yield self.__m_contractor_data[contractor]
         else:
             return -1
