@@ -54,5 +54,25 @@ class GoogleDistanceMatrix:
     
     def get_matrix_cell(self, p_row, p_col):
         return self.__m_stored_matrix[p_row][p_col]
+    
+    def get_closest_distance_row(self, p_row):
+        closest = None
+        for col in self.get_matrix_row(p_row):
+            if closest is None:
+                closest = col
+            elif col[0] < closest[0]:
+                closest = col
+
+        return closest
+    
+    def get_furthest_distance_row(self, p_row):
+        furthest = None
+        for col in self.get_matrix_row(p_row):
+            if furthest is None:
+                furthest = col
+            elif col[0] > furthest[0]:
+                furthest = col
+
+        return furthest
 
 
