@@ -6,7 +6,7 @@ class CustomerDataParser():
         self.__m_file_path = p_file_path
         self.__m_customer_data = None
 
-        if p_file_path is not None:
+        if p_file_path != None:
             self.__parse()
 
     def __parse(self):
@@ -39,15 +39,15 @@ class CustomerDataParser():
             return -1
 
     def get_customer(self, p_address):
-        if self.__m_customer_data is not None:
+        if self.__m_customer_data != None:
             return self.__m_customer_data[p_address]
         else:
             return -1
     
     def get_all_customers(self):
         'NOTE: THIS IS A GENERATOR, DON\'T BE DUMB'
-        if self.__m_customer_data is not None:
+        if self.__m_customer_data != None:
             for customer in self.__m_customer_data:
                 yield self.__m_customer_data[customer]
         else:
-            return -1
+            yield -1

@@ -6,7 +6,7 @@ class ContractorDataParser():
         self.__m_file_path = p_file_path
         self.__m_contractor_data = None
 
-        if p_file_path is not None:
+        if p_file_path != None:
             self.__parse()
 
     def __parse(self):
@@ -42,15 +42,15 @@ class ContractorDataParser():
             return -1
 
     def get_contractor(self, p_name):
-        if self.__m_contractor_data is not None:
+        if self.__m_contractor_data != None:
             return self.__m_contractor_data[p_name]
         else:
             return -1
     
     def get_all_contractors(self):
         'NOTE: THIS IS A GENERATOR, DON\'T BE DUMB'
-        if self.__m_contractor_data is not None:
+        if self.__m_contractor_data != None:
             for contractor in self.__m_contractor_data:
                 yield self.__m_contractor_data[contractor]
         else:
-            return -1
+            yield -1

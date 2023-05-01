@@ -23,7 +23,6 @@ class GoogleDirections:
         url_key = '&key=' + self.__m_api_key
 
         url = self.__m_directions_endpoint + url_origin + url_destination + url_waypoints + url_key
-        print(url)
 
         response = requests.request("GET", url, headers=headers, data=payload)
 
